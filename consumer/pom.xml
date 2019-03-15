@@ -13,6 +13,7 @@
 
     <properties>
         <api.version>1.0-SNAPSHOT</api.version>
+        <provider.version>1.0-SNAPSHOT</provider.version>
     </properties>
 
     <dependencies>
@@ -20,6 +21,11 @@
             <groupId>com.wangy</groupId>
             <artifactId>api</artifactId>
             <version>${api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wangy</groupId>
+            <artifactId>provider</artifactId>
+            <version>${provider.version}</version>
         </dependency>
     </dependencies>
 
