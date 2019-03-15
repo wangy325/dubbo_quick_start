@@ -25,4 +25,86 @@
         </dependency>
     </dependencies>
 
+    <!--build-->
+    <build>
+        <finalName>dubbo-provider</finalName>
+        <!-- 配置文件的打包操作 -->
+        <resources>
+            <resource>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <directory>src/main/resources</directory>
+                <!-- 将 xml和properties文件都打包到build目录下的 classes目录下 -->
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <!-- 将Spring 的配置文件单独打包到META-INF目录下 -->
+            <!-- 自动加载META-INF/spring目录下的所有Spring配置。 配置：(配在java命令-D参数或者dubbo.properties中)
+                dubbo.spring.config=classpath*:META-INF/spring/*.xml 配置spring配置加载位置 -->
+            <!--<resource>
+                <targetPath>${project.build.directory}/classes/META-INF/spring</targetPath>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>-->
+        </resources>
+
+
+        <plugins>
+            <!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <classesDirectory>target/classes/</classesDirectory>
+                    <archive>
+                        <manifest>
+                            <!-- 阿里巴巴的 启动类 -->
+                            <mainClass>com.alibaba.dubbo.container.Main</mainClass>
+                            <!-- 打包时MANIFEST.MF 文件不记录时间戳 版本 -->
+                            <useUniqueVersions>false</useUniqueVersions>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>.</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.9</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <type>jar</type>
+                            <!--<incluedTypes>jar</incluedTypes>-->
+                            <!--<useUniqueVersions>false</useUniqueVersions>-->
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+   <!--
+    作者：狂飙的yellowcong
+    来源：CSDN
+    原文：https://blog.csdn.net/yelllowcong/article/details/78244106
+   -->
+
 </project>

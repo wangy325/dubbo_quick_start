@@ -11,16 +11,19 @@
     <dubbo:application name="demo-provider"/>
 
     <!--使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper-->
-    <dubbo:registry address="zookeeper://localhost:2181"/>
+    <dubbo:registry address="zookeeper://localhost:2181" register="false"/>
+    <!--<dubbo:registry address="zookeeper://127.0.0.1:2181"/>-->
 
     <!-- use multicast registry center to export service -->
     <!--<dubbo:registry address="multicast://224.5.6.7:1234"/>-->
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20880" />
+    <!-- 在ubuntu上启动provider时,需要增加host="当前内网ip"-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <!--<dubbo:protocol name="dubbo" port="20880" host="192.168.1.3"/>-->
 
     <!--使用 dubbo 协议实现定义好的 api.PermissionService 接口-->
-    <dubbo:service interface="wy.dubbo.api.DemoService" ref="demoService" protocol="dubbo" />
+    <dubbo:service interface="wy.dubbo.api.DemoService" ref="demoService" protocol="dubbo"/>
 
     <!--具体实现该接口的 bean-->
     <bean id="demoService" class="wy.dubbo.provider.DemoServiceImpl"/>

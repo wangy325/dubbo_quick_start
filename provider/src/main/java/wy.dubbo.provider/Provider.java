@@ -1,6 +1,6 @@
 package wy.dubbo.provider;
 
-import org.slf4j.Logger;
+import com.alibaba.dubbo.container.Main;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
