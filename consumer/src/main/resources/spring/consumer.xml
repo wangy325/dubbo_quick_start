@@ -9,14 +9,21 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="wy.dubbo.consumer"/>
+    <context:component-scan base-package="wy.dubbo"/>
     <context:property-placeholder location="classpath:spring/consumer.properties"/>
 
     <!-- consumer's application name, used for tracing dependency relationship (not a matching criterion), don't set it same as provider -->
-    <dubbo:application name="${dubbo.application.name}"/>
+    <dubbo:application name="${dubbo.application.name}">
+        <!--    intrinsic qos config     -->
+        <!--
+        <dubbo:parameter key="qos.enable" value="true"/>
+        <dubbo:parameter key="qos.accept.foreign.ip" value="false"/>
+        <dubbo:parameter key="qos.port" value="33333"/>
+        -->
+    </dubbo:application>
 
     <!-- use zookeeper registry center to discover service -->
-<!--    <dubbo:registry address="${dubbo.registry.address}"/>-->
+    <!-- <dubbo:registry address="${dubbo.registry.address}"/> -->
 
     <!-- use multicast registry center to discover service -->
     <dubbo:registry address="multicast://224.5.6.7:1234"/>

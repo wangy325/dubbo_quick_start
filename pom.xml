@@ -16,46 +16,25 @@
 
     <name>dubbo-quick-start</name>
 
+    <!--<repositories>
+        <repository>
+            <id>activiti-repos2</id>  
+            <name>Activiti Repository 2</name>  
+            <url>https://app.camunda.com/nexus/content/groups/public</url>  
+        </repository>
+    </repositories>-->
+
     <properties>
-        <dubbo.version>2.5.3</dubbo.version>
-        <!--<dubbo.rpc.version>2.7.0</dubbo.rpc.version>-->
+        <dubbo.version>2.7.3</dubbo.version>
         <spring.version>5.2.5.RELEASE</spring.version>
-        <zookeeper.version>3.4.13</zookeeper.version>
-        <log4j.version>1.2.17</log4j.version>
-        <slf4j.version>1.6.4</slf4j.version>
+        <zookeeper.version>3.5.7</zookeeper.version>
+        <log4j.version>2.12.1</log4j.version>
         <junit.version>4.12</junit.version>
+        <lombok.version>1.18.12</lombok.version>
+        <netty.verison>4.1.50.Final</netty.verison>
     </properties>
 
     <dependencies>
-
-        <!-- <dependency>
-             <groupId>org.apache.curator</groupId>
-             <artifactId>curator-framework</artifactId>
-             <version>${curator.version}</version>
-             <exclusions>
-                 <exclusion>
-                     <groupId>org.apache.zookeeper</groupId>
-                     <artifactId>zookeeper</artifactId>
-                 </exclusion>
-             </exclusions>
-         </dependency>
-         <dependency>
-             <groupId>javax.validation</groupId>
-             <artifactId>validation-api</artifactId>
-             <version>${validation-api.version}</version>
-         </dependency>
-
-         <dependency>
-             <groupId>org.apache.curator</groupId>
-             <artifactId>curator-client</artifactId>
-             <version>${curator-client.version}</version>
-             <exclusions>
-                 <exclusion>
-                     <groupId>org.apache.zookeeper</groupId>
-                     <artifactId>zookeeper</artifactId>
-                 </exclusion>
-             </exclusions>
-         </dependency>-->
 
         <dependency>
             <groupId>junit</groupId>
@@ -69,7 +48,6 @@
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -92,30 +70,59 @@
 
         <!-- 添加日志相关jar包 -->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
             <version>${log4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
 
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
             <version>${zookeeper.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org.slf4j</artifactId>
+                    <groupId>slf4j-log4j12</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>-->
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-native-epoll</artifactId>
+            <version>${netty.verison}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-handler</artifactId>
+            <version>${netty.verison}</version>
+        </dependency>
+
         <!-- dubbo -->
         <dependency>
-            <groupId>com.alibaba</groupId>
+            <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
             <version>${dubbo.version}</version>
             <exclusions>
@@ -124,12 +131,6 @@
                     <artifactId>spring</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <!--        zookeeper客户端    -->
-        <dependency>
-            <groupId>com.101tec</groupId>
-            <artifactId>zkclient</artifactId>
-            <version>0.10</version>
         </dependency>
     </dependencies>
 

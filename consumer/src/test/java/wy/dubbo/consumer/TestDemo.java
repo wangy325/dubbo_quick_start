@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import wy.dubbo.api.DemoService;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -14,16 +15,16 @@ import java.util.List;
  * @version 1.0
  * @date 2019/3/15 / 10:50
  */
-@ContextConfiguration(locations = {"/spring/consumer-context.xml", "/spring/consumer.xml" })
+@ContextConfiguration(locations = {"/spring/consumer.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestDemo {
 
     @Autowired
-    private DemoService demoService;
+    private Consumer consumer;
 
     @Test
-    public void testDemo(){
-        List<String> permission = demoService.getPermission(10L);
-        System.out.println(permission);
+    public void testDemo() throws IOException {
+        consumer.helloDubbo("wangy325");
+        System.in.read();
     }
 }
