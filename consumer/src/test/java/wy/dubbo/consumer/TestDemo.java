@@ -25,6 +25,6 @@ public class TestDemo {
     @Test
     public void testDemo() throws IOException {
         consumer.helloDubbo("wangy325");
-        System.in.read();
+//        System.in.read();
     }
 }
