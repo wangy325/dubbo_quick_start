@@ -120,20 +120,19 @@ log4j:WARN Please initialize the log4j system properly.
 [Permission_9, Permission_10, Permission_11]
 ```
 
-#### 使用`multicast`作为注册中心调用服务异常(未解决)
+#### 使用`multicast`作为注册中心
+
+启动provider有一个问题：https://github.com/apache/dubbo/issues/2423
 
 ```
-log4j:WARN No appenders could be found for logger (org.springframework.core.env.StandardEnvironment).
-log4j:WARN Please initialize the log4j system properly.
-Exception in thread "main" com.alibaba.dubbo.rpc.RpcException: Failed to invoke the method getPerssions in the service wy.dubbo.api.DemoService. No provider available for the service wy.dubbo.api.DemoService from registry 224.5.6.7:1234 on the consumer 192.168.11.107 using the dubbo version 2.5.3. Please check if the providers have been started and registered.
-	at com.alibaba.dubbo.rpc.cluster.support.AbstractClusterInvoker.checkInvokers(AbstractClusterInvoker.java:246)
-	at com.alibaba.dubbo.rpc.cluster.support.FailoverClusterInvoker.doInvoke(FailoverClusterInvoker.java:55)
-	at com.alibaba.dubbo.rpc.cluster.support.AbstractClusterInvoker.invoke(AbstractClusterInvoker.java:227)
-	at com.alibaba.dubbo.rpc.cluster.support.wrapper.MockClusterInvoker.invoke(MockClusterInvoker.java:72)
-	at com.alibaba.dubbo.rpc.proxy.InvokerInvocationHandler.invoke(InvokerInvocationHandler.java:52)
-	at com.alibaba.dubbo.common.bytecode.proxy0.getPerssions(proxy0.java)
-	at wy.dubbo.consumer.Consumer.main(Consumer.java:22)
+Caused by: java.net.SocketException: Can't assign requested address
+	at java.net.PlainDatagramSocketImpl.join(Native Method)
+	at java.net.AbstractPlainDatagramSocketImpl.join(AbstractPlainDatagramSocketImpl.java:178)
+	at java.net.MulticastSocket.joinGroup(MulticastSocket.java:323)
+	at com.alibaba.dubbo.registry.multicast.MulticastRegistry.<init>(MulticastRegistry.java:90)
+	... 23 more
 ```
+按照配置，为程序添加运行参数`-Djava.net.preferIPv4Stack=true`可解决问题
 
 #### 在ubuntu开发环境下本地调试provider启动异常
 

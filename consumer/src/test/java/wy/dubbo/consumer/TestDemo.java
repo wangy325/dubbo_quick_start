@@ -14,7 +14,7 @@ import java.util.List;
  * @version 1.0
  * @date 2019/3/15 / 10:50
  */
-@ContextConfiguration(locations = {"/spring/application-context.xml", "/spring/consumer.xml" })
+@ContextConfiguration(locations = {"/spring/consumer-context.xml", "/spring/consumer.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestDemo {
 

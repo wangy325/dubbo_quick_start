@@ -2,28 +2,35 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://code.alibabatech.com/schema/dubbo
-       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="wy.dubbo"/>
+
+    <context:property-placeholder location="classpath:spring/provider.properties"/>
+
 
     <!--定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识-->
-    <dubbo:application name="demo-provider"/>
+    <dubbo:application name="${dubbo.application.name}"/>
 
     <!--使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper-->
-    <!--<dubbo:registry address="zookeeper://localhost:2181" register="false"/>-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+<!--    <dubbo:registry address="${dubbo.registry.address}"/>-->
 
     <!-- use multicast registry center to export service -->
-    <!--<dubbo:registry address="multicast://224.5.6.7:1234"/>-->
+    <dubbo:registry address="multicast://224.5.6.7:1234"/>
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
     <!-- 在ubuntu上启动provider时,需要增加host="当前内网ip"-->
-    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol id="provider" name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"/>
     <!--<dubbo:protocol name="dubbo" port="20880" host="192.168.1.3"/>-->
 
     <!--使用 dubbo 协议实现定义好的 api.PermissionService 接口-->
-    <dubbo:service interface="wy.dubbo.api.DemoService" ref="demoService" protocol="dubbo"/>
+    <dubbo:service interface="wy.dubbo.api.DemoService" ref="demoService" protocol="provider"/>
 
     <!--具体实现该接口的 bean-->
     <bean id="demoService" class="wy.dubbo.provider.DemoServiceImpl"/>

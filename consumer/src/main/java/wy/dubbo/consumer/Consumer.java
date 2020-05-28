@@ -17,8 +17,6 @@ import java.util.List;
  */
 public class Consumer {
 
-
-
     public static void main(String[] args) throws IOException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:/spring/consumer.xml");
         context.start();
@@ -28,8 +26,6 @@ public class Consumer {
 //        List<String> hello = demoService.getPermission(10L);
         String hello = demoService.sayHi("Lucy");
         System.out.println(hello);
-
-
     }
 
 }
