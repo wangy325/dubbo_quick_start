@@ -2,9 +2,11 @@ package wy.dubbo.provider;
 
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.container.Main;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * 运行此main方法以注册provider
@@ -18,11 +20,13 @@ import java.io.IOException;
 public class Provider {
     public static void main(String[] args) throws IOException {
         // 如果使用multicast作为注册中心, 需要如下设置
-        //System.setProperty("java.net.perferIPv4Stack","true");
+        // 或使用 java 命令行参数 -Djava.net.preferIPv4Stack=true
+        System.setProperty("java.net.perferIPv4Stack","true");
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:/spring/provider.xml");
-        log.info("{}: here" , context.getDisplayName());
+        log.info("{}: starting Provider" , context.getDisplayName());
         context.start();
         log.info("Provider started.");
-        System.in.read(); // press any key to exit
+//        System.in.read(); // press any key to exit
+        Main.main(args);
     }
 }

@@ -15,22 +15,19 @@
     <!-- consumer's application name, used for tracing dependency relationship (not a matching criterion), don't set it same as provider -->
     <dubbo:application name="${dubbo.application.name}">
         <!--    intrinsic qos config     -->
-        <!--
-        <dubbo:parameter key="qos.enable" value="true"/>
+        <dubbo:parameter key="qos.enable" value="false"/>
         <dubbo:parameter key="qos.accept.foreign.ip" value="false"/>
-        <dubbo:parameter key="qos.port" value="33333"/>
-        -->
+        <dubbo:parameter key="qos.port" value="22222"/>
     </dubbo:application>
 
-    <!-- use zookeeper registry center to discover service -->
-    <!-- <dubbo:registry address="${dubbo.registry.address}"/> -->
-
-    <!-- use multicast registry center to discover service -->
-    <dubbo:registry address="multicast://224.5.6.7:1234"/>
+    <dubbo:registry address="${dubbo.registry.address}"/>
 
     <!-- generate proxy for the remote service, then demoService can be used in the same way as the local regular interface -->
     <dubbo:reference id="demoService" check="false" interface="wy.dubbo.api.DemoService"/>
 
     <!--provider.xml 设置 register="false"时, 调用本地启动的dubbo服务 -->
-    <!--<dubbo:reference id="demoService" check="false" interface="wy.dubbo.api.DemoService" url="dubbo://192.168.11.107:20880"/>-->
+    <!--
+    <dubbo:reference id="demoService" check="false" interface="wy.dubbo.api.DemoService"
+                     url="dubbo://localhost:20880"/>
+    -->
 </beans>

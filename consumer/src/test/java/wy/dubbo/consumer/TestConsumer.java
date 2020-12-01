@@ -17,7 +17,7 @@ import java.util.List;
  */
 @ContextConfiguration(locations = {"/spring/consumer.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TestDemo {
+public class TestConsumer {
 
     @Autowired
     private Consumer consumer;
