@@ -5,10 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import wy.dubbo.api.DemoService;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author wangy
@@ -25,6 +23,6 @@ public class TestConsumer {
     @Test
     public void testDemo() throws IOException {
         consumer.helloDubbo("wangy325");
-//        System.in.read();
+        System.in.read();
     }
 }

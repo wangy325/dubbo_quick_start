@@ -3,31 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <groupId>com.wangy.dubbo</groupId>
         <artifactId>quick-start-dubbo</artifactId>
-        <groupId>com.wangy</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>provider</artifactId>
+    <artifactId>quick-start-provider</artifactId>
 
     <packaging>jar</packaging>
 
     <properties>
-        <api.version>1.0-SNAPSHOT</api.version>
+        <api.version>0.1-SNAPSHOT</api.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.wangy</groupId>
-            <artifactId>api</artifactId>
+            <groupId>com.wangy.dubbo</groupId>
+            <artifactId>quick-start-api</artifactId>
             <version>${api.version}</version>
         </dependency>
     </dependencies>
 
     <!--build-->
     <build>
-        <finalName>dubbo-provider</finalName>
         <!-- 配置文件的打包操作 -->
         <resources>
             <resource>
@@ -65,7 +63,8 @@
                     <archive>
                         <manifest>
                             <!-- 阿里巴巴的 启动类 -->
-                            <mainClass>com.alibaba.dubbo.container.Main</mainClass>
+<!--                            <mainClass>com.alibaba.dubbo.container.Main</mainClass>-->
+                            <mainClass>wy.dubbo.provider.Provider</mainClass>
                             <!-- 打包时MANIFEST.MF 文件不记录时间戳 版本 -->
                             <useUniqueVersions>false</useUniqueVersions>
                             <addClasspath>true</addClasspath>
